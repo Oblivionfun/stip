@@ -1,0 +1,90 @@
+2025-12-04 16:26:35,177 - PersonaClusterer - INFO - Loaded 1002 factor scores
+2025-12-04 16:26:35,178 - PersonaClusterer - INFO - Performing K-Means clustering with 6 clusters...
+2025-12-04 16:26:35,248 - PersonaClusterer - INFO - Clustering complete!
+2025-12-04 16:26:35,248 - PersonaClusterer - INFO - Silhouette score: 0.1260
+2025-12-04 16:26:35,257 - PersonaClusterer - INFO - 
+Cluster Profiles:
+2025-12-04 16:26:35,257 - PersonaClusterer - INFO - 
+Cluster 0 (n=271):
+2025-12-04 16:26:35,257 - PersonaClusterer - INFO -   Top 3 dominant factors:
+2025-12-04 16:26:35,257 - PersonaClusterer - INFO -     rerouting_proactiveness: 0.799
+2025-12-04 16:26:35,257 - PersonaClusterer - INFO -     time_reliability_preference: 0.365
+2025-12-04 16:26:35,257 - PersonaClusterer - INFO -     risk_aversion: 0.343
+2025-12-04 16:26:35,257 - PersonaClusterer - INFO - 
+Cluster 1 (n=196):
+2025-12-04 16:26:35,257 - PersonaClusterer - INFO -   Top 3 dominant factors:
+2025-12-04 16:26:35,257 - PersonaClusterer - INFO -     time_reliability_preference: 0.821
+2025-12-04 16:26:35,257 - PersonaClusterer - INFO -     information_dependency: 0.670
+2025-12-04 16:26:35,257 - PersonaClusterer - INFO -     risk_aversion: 0.426
+2025-12-04 16:26:35,257 - PersonaClusterer - INFO - 
+Cluster 2 (n=68):
+2025-12-04 16:26:35,257 - PersonaClusterer - INFO -   Top 3 dominant factors:
+2025-12-04 16:26:35,257 - PersonaClusterer - INFO -     time_reliability_preference: 1.424
+2025-12-04 16:26:35,257 - PersonaClusterer - INFO -     information_dependency: 1.405
+2025-12-04 16:26:35,257 - PersonaClusterer - INFO -     rerouting_proactiveness: 1.284
+2025-12-04 16:26:35,257 - PersonaClusterer - INFO - 
+Cluster 3 (n=83):
+2025-12-04 16:26:35,257 - PersonaClusterer - INFO -   Top 3 dominant factors:
+2025-12-04 16:26:35,257 - PersonaClusterer - INFO -     rerouting_proactiveness: 0.905
+2025-12-04 16:26:35,257 - PersonaClusterer - INFO -     risk_aversion: 0.869
+2025-12-04 16:26:35,257 - PersonaClusterer - INFO -     familiar_route_preference: 0.772
+2025-12-04 16:26:35,257 - PersonaClusterer - INFO - 
+Cluster 4 (n=213):
+2025-12-04 16:26:35,257 - PersonaClusterer - INFO -   Top 3 dominant factors:
+2025-12-04 16:26:35,258 - PersonaClusterer - INFO -     information_dependency: 0.737
+2025-12-04 16:26:35,258 - PersonaClusterer - INFO -     risk_aversion: 0.459
+2025-12-04 16:26:35,258 - PersonaClusterer - INFO -     familiar_route_preference: 0.456
+2025-12-04 16:26:35,258 - PersonaClusterer - INFO - 
+Cluster 5 (n=171):
+2025-12-04 16:26:35,258 - PersonaClusterer - INFO -   Top 3 dominant factors:
+2025-12-04 16:26:35,258 - PersonaClusterer - INFO -     familiar_route_preference: 0.779
+2025-12-04 16:26:35,258 - PersonaClusterer - INFO -     rerouting_proactiveness: 0.693
+2025-12-04 16:26:35,258 - PersonaClusterer - INFO -     information_dependency: 0.579
+2025-12-04 16:26:35,744 - PersonaClusterer - INFO - Saved clustering visualization to outputs/persona_clustering.png
+2025-12-04 16:26:39,042 - PersonaClusterer - INFO - Saved cluster distributions to outputs/cluster_distributions.png
+2025-12-04 16:26:39,048 - PersonaClusterer - INFO - Saved persona type mapping
+2025-12-04 16:28:06,187 - PersonaClusterer - INFO - Loaded 1002 factor scores
+2025-12-04 16:28:06,188 - PersonaClusterer - INFO - Performing K-Means clustering with 6 clusters...
+2025-12-04 16:28:06,257 - PersonaClusterer - INFO - Clustering complete!
+2025-12-04 16:28:06,257 - PersonaClusterer - INFO - Silhouette score: 0.1260
+2025-12-04 16:28:06,266 - PersonaClusterer - INFO - 
+Cluster Profiles:
+2025-12-04 16:28:06,266 - PersonaClusterer - INFO - 
+Cluster 0 (n=271):
+2025-12-04 16:28:06,266 - PersonaClusterer - INFO -   Top 3 dominant factors:
+2025-12-04 16:28:06,266 - PersonaClusterer - INFO -     rerouting_proactiveness: 0.799
+2025-12-04 16:28:06,266 - PersonaClusterer - INFO -     time_reliability_preference: 0.365
+2025-12-04 16:28:06,266 - PersonaClusterer - INFO -     risk_aversion: 0.343
+2025-12-04 16:28:06,266 - PersonaClusterer - INFO - 
+Cluster 1 (n=196):
+2025-12-04 16:28:06,266 - PersonaClusterer - INFO -   Top 3 dominant factors:
+2025-12-04 16:28:06,266 - PersonaClusterer - INFO -     time_reliability_preference: 0.821
+2025-12-04 16:28:06,266 - PersonaClusterer - INFO -     information_dependency: 0.670
+2025-12-04 16:28:06,266 - PersonaClusterer - INFO -     risk_aversion: 0.426
+2025-12-04 16:28:06,266 - PersonaClusterer - INFO - 
+Cluster 2 (n=68):
+2025-12-04 16:28:06,266 - PersonaClusterer - INFO -   Top 3 dominant factors:
+2025-12-04 16:28:06,266 - PersonaClusterer - INFO -     time_reliability_preference: 1.424
+2025-12-04 16:28:06,266 - PersonaClusterer - INFO -     information_dependency: 1.405
+2025-12-04 16:28:06,266 - PersonaClusterer - INFO -     rerouting_proactiveness: 1.284
+2025-12-04 16:28:06,266 - PersonaClusterer - INFO - 
+Cluster 3 (n=83):
+2025-12-04 16:28:06,266 - PersonaClusterer - INFO -   Top 3 dominant factors:
+2025-12-04 16:28:06,267 - PersonaClusterer - INFO -     rerouting_proactiveness: 0.905
+2025-12-04 16:28:06,267 - PersonaClusterer - INFO -     risk_aversion: 0.869
+2025-12-04 16:28:06,267 - PersonaClusterer - INFO -     familiar_route_preference: 0.772
+2025-12-04 16:28:06,267 - PersonaClusterer - INFO - 
+Cluster 4 (n=213):
+2025-12-04 16:28:06,267 - PersonaClusterer - INFO -   Top 3 dominant factors:
+2025-12-04 16:28:06,267 - PersonaClusterer - INFO -     information_dependency: 0.737
+2025-12-04 16:28:06,267 - PersonaClusterer - INFO -     risk_aversion: 0.459
+2025-12-04 16:28:06,267 - PersonaClusterer - INFO -     familiar_route_preference: 0.456
+2025-12-04 16:28:06,267 - PersonaClusterer - INFO - 
+Cluster 5 (n=171):
+2025-12-04 16:28:06,267 - PersonaClusterer - INFO -   Top 3 dominant factors:
+2025-12-04 16:28:06,267 - PersonaClusterer - INFO -     familiar_route_preference: 0.779
+2025-12-04 16:28:06,267 - PersonaClusterer - INFO -     rerouting_proactiveness: 0.693
+2025-12-04 16:28:06,267 - PersonaClusterer - INFO -     information_dependency: 0.579
+2025-12-04 16:28:06,720 - PersonaClusterer - INFO - Saved clustering visualization to outputs/persona_clustering.png
+2025-12-04 16:28:09,701 - PersonaClusterer - INFO - Saved cluster distributions to outputs/cluster_distributions.png
+2025-12-04 16:28:09,706 - PersonaClusterer - INFO - Saved persona type mapping

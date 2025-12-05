@@ -1,0 +1,153 @@
+# 偏好建模配置文件
+
+# 数据路径
+data:
+  raw_data_dir: "data"
+  output_dir: "outputs"
+  countries: ["CN"]  # 暂时只处理CN数据，UK/US/AU需要列名映射
+
+# 数据质量控制
+quality_control:
+  min_completion_time: 180  # 最小填写时长（秒）
+  attention_check_question: "Q31"  # 注意力检查题
+  attention_check_answer: 2  # 正确答案
+  max_commute_time: 120  # 最大通勤时间（分钟）
+
+# 因子分析参数
+factor_analysis:
+  n_factors: 8  # 提取的因子数量
+  rotation: "varimax"  # 旋转方法
+  random_state: 42
+
+  # 因子命名
+  factor_names:
+    - "rerouting_proactiveness"      # 改道主动性
+    - "information_dependency"        # 信息依赖度
+    - "time_reliability_preference"   # 时间可靠性偏好
+    - "risk_aversion"                 # 风险厌恶度
+    - "familiar_route_preference"     # 熟悉路线偏好
+    - "time_sensitivity"              # 时间敏感度
+    - "external_info_sensitivity"     # 外部信息敏感度
+    - "route_flexibility"             # 路线灵活性
+
+  # 态度题列表（用于因子分析）
+  attitude_questions:
+    # 改道主动性
+    - "Q6"   # 拥堵是问题
+    - "Q7"   # 经常改道
+    - "Q15"  # 因拥堵信息改变计划
+    # 改道信心
+    - "Q8"   # 相信自己选择
+    - "Q9"   # 改道后返回
+    # 信息依赖
+    - "Q11"  # 何时寻求信息
+    - "Q12"  # 经常寻求信息
+    # 信息独立
+    - "Q13"  # 不同意路线引导
+    - "Q14"  # 不理会引导
+    # 情境响应
+    - "Q16"  # 施工改道
+    - "Q17"  # 特殊事件改道
+    - "Q18"  # 天气改道
+    - "Q19"  # 高峰期改道
+    - "Q20"  # 事故改道
+    # 熟悉偏好
+    - "Q22"  # 倾向熟悉路线
+    - "Q23_reversed"  # 熟悉地区更愿改道（反向）
+    # 时间可靠性
+    - "Q25"  # 可靠性重要
+    - "Q29"  # 宁可慢但顺畅
+    - "Q27"  # 改道更长不改道
+    # 时间敏感度
+    - "Q30"  # 节省时间立即改道
+    # 路线类型
+    - "Q24"  # 倾向高速
+    - "Q32"  # 红绿灯影响
+    # 灵活性
+    - "Q26"  # 多选择更愿改道
+    - "Q33"  # 距离远更愿改道
+    # 外部信息
+    - "Q36"  # 信息板有用
+    - "Q37"  # 信息板建议更愿改道
+    - "Q38"  # 看到他人改道
+    # 风险厌恶
+    - "Q34"  # 避免作业区
+    - "Q28"  # 车道关闭影响
+    - "Q35"  # 知道特殊事件
+    - "Q40_reversed"  # 激进驾驶员（反向）
+    - "Q41"  # 谨慎驾驶员
+
+# 聚类参数
+clustering:
+  n_clusters: 6  # 聚类数量
+  method: "kmeans"  # 聚类方法
+  random_state: 42
+
+  # 聚类类型标签（需要根据聚类结果手动调整）
+  persona_types:
+    0: "CAUTIOUS_FAMILIAR_INFO_DEPENDENT"
+    1: "TIME_SENSITIVE_FLEXIBLE_REROUTER"
+    2: "RISK_TOLERANT_INDEPENDENT_NAVIGATOR"
+    3: "BALANCED_RATIONAL_DRIVER"
+    4: "CONSERVATIVE_PATIENT_FOLLOWER"
+    5: "PROACTIVE_TECH_SAVVY_OPTIMIZER"
+
+# 编码映射
+encodings:
+  gender:
+    1: "male"
+    2: "female"
+
+  education:
+    1: "high_school"
+    2: "bachelor"
+    3: "master"
+    4: "phd"
+
+  route_type:
+    1: "highway"
+    2: "arterial"
+    3: "local_street"
+
+  location:
+    1: "downtown"
+    2: "urban"
+    3: "suburban"
+    4: "rural"
+
+  occupation:
+    1: "manager"
+    2: "professional"
+    3: "technician"
+    4: "clerk"
+    5: "service"
+    6: "other"
+
+  income_level:
+    low: [1, 2]
+    middle: [3, 4, 5]
+    high: [6, 7]
+
+  has_navigation:
+    1: true
+    2: false
+
+# 名字生成（用于Persona）
+name_generation:
+  enabled: true
+  use_real_names: false  # false则生成 "User_XXXX" 格式
+
+  # 各国常见名字库（可选）
+  name_pool:
+    CN:
+      male: ["Zhang Wei", "Li Ming", "Wang Qiang", "Liu Yang", "Chen Hao"]
+      female: ["Wang Fang", "Li Na", "Zhang Li", "Liu Jing", "Chen Min"]
+    US:
+      male: ["John Smith", "Michael Johnson", "David Williams", "James Brown", "Robert Jones"]
+      female: ["Mary Johnson", "Patricia Williams", "Jennifer Brown", "Linda Davis", "Elizabeth Miller"]
+    UK:
+      male: ["James Smith", "John Williams", "David Jones", "Michael Brown", "Daniel Taylor"]
+      female: ["Mary Smith", "Susan Williams", "Margaret Jones", "Sarah Brown", "Jessica Taylor"]
+    AU:
+      male: ["Jack Smith", "William Jones", "Oliver Brown", "James Wilson", "Noah Taylor"]
+      female: ["Emily Smith", "Charlotte Jones", "Olivia Brown", "Amelia Wilson", "Ava Taylor"]

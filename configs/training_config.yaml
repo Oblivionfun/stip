@@ -1,0 +1,127 @@
+# 阶段3配置：大模型微调
+# 使用unsloth + 4bit量化 + LoRA进行高效微调
+
+# 模型配置
+model:
+  model_name: "model/models"  # Qwen3模型路径
+  max_seq_length: 2048  # 最大序列长度
+  dtype: null  # 自动选择
+  load_in_4bit: true  # 4bit量化加载
+
+# LoRA配置（参考Centaur论文）
+lora:
+  r: 16  # LoRA rank
+  lora_alpha: 32  # LoRA alpha
+  lora_dropout: 0.05
+  bias: "none"
+  use_gradient_checkpointing: "unsloth"  # unsloth优化的梯度检查点
+  random_state: 42
+  use_rslora: true  # RSLoRA提升稳定性
+
+  # 目标模块
+  target_modules:
+    - "q_proj"
+    - "k_proj"
+    - "v_proj"
+    - "o_proj"
+    - "gate_proj"
+    - "up_proj"
+    - "down_proj"
+
+# 训练配置
+training:
+  output_dir: "checkpoints/sft_model"
+  num_train_epochs: 3
+  per_device_train_batch_size: 2
+  per_device_eval_batch_size: 2
+  gradient_accumulation_steps: 4  # 有效batch size = 2 * 4 = 8
+
+  # 优化器
+  optim: "adamw_8bit"  # 8bit Adam优化器节省显存
+  learning_rate: 2.0e-4
+  weight_decay: 0.01
+  warmup_steps: 100
+  max_grad_norm: 1.0
+
+  # 学习率调度
+  lr_scheduler_type: "cosine"
+
+  # 日志和保存
+  logging_steps: 10
+  save_steps: 500
+  save_total_limit: 3
+  evaluation_strategy: "steps"
+  eval_steps: 500
+
+  # 性能优化
+  fp16: false
+  bf16: true  # 使用bf16混合精度
+  tf32: true
+
+  # 其他
+  report_to: "none"  # 不上传到wandb等
+  seed: 42
+  dataloader_num_workers: 4
+  remove_unused_columns: false
+
+# Completion-only训练配置
+completion_only:
+  enabled: true
+  response_template: '{\n    "thinking":'  # response起始标记（更新为thinking字段）
+  instruction_template: "You play the role"  # instruction起始标记（可选）
+
+# 数据配置
+data:
+  train_file: "outputs/train_samples.jsonl"
+  val_file: "outputs/validation_samples.jsonl"
+  max_samples: null  # null表示使用全部数据
+  shuffle: true
+
+# Prompt格式
+prompt_format:
+  # 系统提示（可选）
+  system_prompt: null
+
+  # 用户消息模板
+  user_template: "{prompt}"
+
+  # 助手消息模板
+  assistant_template: '{response_json}'
+
+  # 完整格式（Qwen3格式）
+  chat_template: |
+    <|im_start|>user
+    {prompt}<|im_end|>
+    <|im_start|>assistant
+    {response_json}<|im_end|>
+
+# 评估配置
+evaluation:
+  # 评估指标
+  metrics:
+    - "loss"
+    - "perplexity"
+
+  # 生成测试
+  generation_test:
+    enabled: true
+    num_samples: 5  # 每次评估生成5个样本
+    max_new_tokens: 256
+    temperature: 0.7
+    top_p: 0.9
+
+# 推理配置（用于测试）
+inference:
+  max_new_tokens: 256
+  temperature: 0.7
+  top_p: 0.9
+  top_k: 50
+  repetition_penalty: 1.0
+  do_sample: true
+
+# 路径配置
+paths:
+  model_dir: "model/models"
+  output_dir: "checkpoints/sft_model"
+  cache_dir: ".cache"
+  logs_dir: "outputs/logs"

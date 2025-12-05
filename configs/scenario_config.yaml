@@ -1,0 +1,182 @@
+# 阶段2配置：训练数据构造
+# 场景生成、决策模拟、样本构造的参数配置
+
+scenario_generation:
+  # 每个Persona生成的场景数
+  scenarios_per_persona: 10
+
+  # 场景模板（出行类型）
+  templates:
+    - name: "commute_morning"
+      origin: "Home"
+      destination: "Office"
+      time_range: ["07:00", "09:00"]
+      trip_purpose: "commute_to_work"
+      weight: 0.5  # 50%的场景
+
+    - name: "commute_evening"
+      origin: "Office"
+      destination: "Home"
+      time_range: ["17:00", "19:00"]
+      trip_purpose: "commute_from_work"
+      weight: 0.3  # 30%的场景
+
+    - name: "errand"
+      origin: "Home"
+      destination: "Shopping_Mall"
+      time_range: ["10:00", "15:00"]
+      trip_purpose: "shopping"
+      weight: 0.2  # 20%的场景
+
+  # 延误分布
+  delay_scenarios:
+    - level: "minor"
+      delay_range: [3, 7]
+      weight: 0.3
+    - level: "moderate"
+      delay_range: [8, 15]
+      weight: 0.4
+    - level: "severe"
+      delay_range: [16, 30]
+      weight: 0.2
+    - level: "none"
+      delay_range: [0, 0]
+      weight: 0.1
+
+  # 事件类型分布
+  event_types:
+    congestion: 0.50
+    accident: 0.20
+    construction: 0.15
+    weather: 0.10
+    special_event: 0.05
+
+  # 事件严重程度
+  event_severity:
+    minor: 0.3
+    moderate: 0.5
+    severe: 0.2
+
+  # 路径配置
+  routes:
+    default_num: 2  # 默认2条路径（A和B）
+
+    # 熟悉度范围
+    familiarity:
+      usual_route: [0.90, 0.98]
+      alternative_route: [0.50, 0.75]
+
+    # 基准旅行时间相对于Persona的commute_time的比例
+    travel_time_base_ratio: [0.8, 1.2]
+
+    # 替代路线相对于主路线的时间差
+    alternative_time_difference: [0, 5]  # 分钟
+
+    # 不确定性等级
+    uncertainty_levels:
+      - "low"
+      - "moderate"
+      - "high"
+
+  # 情境因素
+  context:
+    weather_conditions:
+      clear: 0.70
+      rain: 0.20
+      snow: 0.05
+      fog: 0.05
+
+    # 重要会议概率
+    important_meeting_prob: 0.15
+
+    # 时间裕量分布（分钟）
+    time_buffer_range: [0, 30]
+
+# 数据质量控制
+quality_control:
+  # 决策分布目标
+  target_reroute_rate: [0.35, 0.65]  # 改道率应在35-65%
+
+  # 确保每个Persona至少覆盖
+  min_scenarios_per_persona:
+    delay_levels: 3  # 至少3种延误等级
+    event_types: 2   # 至少2种事件类型
+    time_periods: 2  # 至少2个时段
+
+  # 场景有效性检查
+  validation:
+    max_travel_time: 180  # 最大旅行时间180分钟
+    min_travel_time: 5    # 最小旅行时间5分钟
+    max_delay_ratio: 2.0  # 延误不超过正常时间的2倍
+
+# 决策模拟参数
+decision_simulation:
+  # 效用函数权重
+  utility_weights:
+    time_cost: -0.5           # 时间成本
+    delay_penalty: -1.0       # 延误惩罚
+    uncertainty_penalty: -0.8 # 不确定性惩罚
+    familiarity_bonus: 3.0    # 熟悉路线奖励
+
+  # 不确定性映射（转换为分钟等效成本）
+  uncertainty_cost_map:
+    low: 0
+    moderate: 5
+    high: 10
+
+  # Gumbel噪声参数
+  gumbel_noise:
+    enabled: true
+    scale: 1.0  # 噪声强度
+
+  # 阈值规则（覆盖效用计算）
+  threshold_rules:
+    # 如果延误超过个人阈值，强制高改道概率
+    force_reroute_if_exceed_threshold:
+      enabled: true
+      probability: 0.85  # 85%改道
+
+    # 如果有重要会议，时间敏感度提升
+    important_meeting_boost: 1.5
+
+# LLM样本构造
+sample_construction:
+  # 输出格式
+  output_format: "jsonl"  # 每行一个JSON对象
+
+  # Response生成
+  response_generation:
+    # reflection文本长度目标
+    reflection_length_target: [80, 150]  # 单词数
+
+    # plan格式
+    plan_formats:
+      keep_current: "none"
+      update_path: "update path: {route_description}"
+      update_time: "update departure time: {new_time}"
+      shortest: "update path: shortest"
+
+  # 模板文件
+  templates:
+    prompt_template: "configs/templates/prompt_template.j2"
+    reflection_template: "configs/templates/reflection_template.j2"
+
+# 路径配置
+paths:
+  input:
+    personas: "outputs/personas.json"
+    persona_types: "outputs/persona_types.json"
+
+  output:
+    scenarios: "outputs/scenarios.json"
+    decisions: "outputs/decisions.json"
+    train_samples: "outputs/train_samples.jsonl"
+    validation_samples: "outputs/validation_samples.jsonl"
+    logs: "outputs/logs/data_construction.log"
+
+# 数据划分
+data_split:
+  train_ratio: 0.9  # 90%训练
+  val_ratio: 0.1    # 10%验证
+  shuffle: true
+  random_seed: 42

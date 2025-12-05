@@ -1,0 +1,16 @@
+2025-12-04 16:44:12,092 - DecisionSimulator - INFO - Loaded 1002 personas and 10020 scenarios
+2025-12-04 16:44:12,092 - DecisionSimulator - INFO - Simulating decisions for 10020 scenarios...
+2025-12-04 16:44:12,133 - DecisionSimulator - INFO - Progress: 1000/10020 scenarios
+2025-12-04 16:44:12,144 - DecisionSimulator - INFO - Progress: 2000/10020 scenarios
+2025-12-04 16:44:12,154 - DecisionSimulator - INFO - Progress: 3000/10020 scenarios
+2025-12-04 16:44:12,165 - DecisionSimulator - INFO - Progress: 4000/10020 scenarios
+2025-12-04 16:44:12,176 - DecisionSimulator - INFO - Progress: 5000/10020 scenarios
+2025-12-04 16:44:12,187 - DecisionSimulator - INFO - Progress: 6000/10020 scenarios
+2025-12-04 16:44:12,197 - DecisionSimulator - INFO - Progress: 7000/10020 scenarios
+2025-12-04 16:44:12,208 - DecisionSimulator - INFO - Progress: 8000/10020 scenarios
+2025-12-04 16:44:12,221 - DecisionSimulator - INFO - Progress: 9000/10020 scenarios
+2025-12-04 16:44:12,232 - DecisionSimulator - INFO - Progress: 10000/10020 scenarios
+2025-12-04 16:44:12,232 - DecisionSimulator - INFO - Generated 10020 decisions
+2025-12-04 16:44:12,240 - DecisionSimulator - WARNING - ⚠ Reroute rate 68.41% is outside target range [35.0%, 65.0%]
+2025-12-04 16:44:12,359 - DecisionSimulator - INFO - Saved 10020 decisions to outputs/decisions.json
+2025-12-04 16:44:12,360 - DecisionSimulator - INFO - Saved statistics to outputs/decision_statistics.json

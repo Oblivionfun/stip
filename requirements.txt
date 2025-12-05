@@ -1,0 +1,34 @@
+# 基础依赖
+pandas>=2.0.0
+numpy>=1.24.0
+openpyxl>=3.1.0  # Excel文件读取
+pyyaml>=6.0
+
+# 数据分析与建模
+scikit-learn>=1.3.0
+scipy>=1.11.0
+
+# 可视化
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# 深度学习框架（阶段3需要）
+torch>=2.1.0
+transformers>=4.35.0
+
+# 高效微调（阶段3需要）
+# unsloth  # 需要从源码安装
+peft>=0.6.0
+trl>=0.7.0
+bitsandbytes>=0.41.0
+accelerate>=0.24.0
+
+# 模板引擎（阶段2需要）
+jinja2>=3.1.2
+
+# 进度条
+tqdm>=4.66.0
+
+# Jupyter支持（可选）
+jupyter>=1.0.0
+ipywidgets>=8.1.0

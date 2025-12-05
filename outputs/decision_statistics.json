@@ -1,0 +1,36 @@
+{
+  "total_decisions": 10020,
+  "reroute_count": 6855,
+  "keep_route_count": 3165,
+  "reroute_rate": 68.41,
+  "route_distribution": {
+    "A": 3165,
+    "B": 6855
+  },
+  "reasoning_keywords": {
+    "time-sensitive": {
+      "count": 2110,
+      "percentage": 21.06
+    },
+    "risk-averse": {
+      "count": 2450,
+      "percentage": 24.45
+    },
+    "familiar": {
+      "count": 2170,
+      "percentage": 21.66
+    },
+    "delay": {
+      "count": 7203,
+      "percentage": 71.89
+    },
+    "urgent": {
+      "count": 1462,
+      "percentage": 14.59
+    },
+    "saves": {
+      "count": 6267,
+      "percentage": 62.54
+    }
+  }
+}

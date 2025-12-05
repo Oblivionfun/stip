@@ -1,0 +1,56 @@
+2025-12-04 16:15:10,560 - DataLoader - INFO - Loading data from data/CN_dataset.xlsx
+2025-12-04 16:15:11,209 - DataLoader - INFO - Loaded 1004 samples from CN
+2025-12-04 16:15:11,213 - DataLoader - INFO - Loading data from data/UK_dataset.xlsx
+2025-12-04 16:15:11,865 - DataLoader - INFO - Loaded 896 samples from UK
+2025-12-04 16:15:11,867 - DataLoader - ERROR - Failed to load UK data: '序号'
+2025-12-04 16:15:11,867 - DataLoader - WARNING - Skipping UK: '序号'
+2025-12-04 16:15:11,867 - DataLoader - INFO - Loading data from data/US_dataset.xlsx
+2025-12-04 16:15:12,522 - DataLoader - INFO - Loaded 887 samples from US
+2025-12-04 16:15:12,524 - DataLoader - ERROR - Failed to load US data: '序号'
+2025-12-04 16:15:12,524 - DataLoader - WARNING - Skipping US: '序号'
+2025-12-04 16:15:12,524 - DataLoader - INFO - Loading data from data/AU_dataset.xlsx
+2025-12-04 16:15:12,524 - DataLoader - ERROR - Failed to load AU data: [Errno 2] No such file or directory: 'data/AU_dataset.xlsx'
+2025-12-04 16:15:12,524 - DataLoader - WARNING - Skipping AU: [Errno 2] No such file or directory: 'data/AU_dataset.xlsx'
+2025-12-04 16:15:12,525 - DataLoader - INFO - Total samples loaded: 1004
+2025-12-04 16:15:12,525 - DataLoader - INFO - Starting preprocessing...
+2025-12-04 16:15:12,526 - DataLoader - INFO - Filtered 0 samples (completion time < 180s)
+2025-12-04 16:15:12,527 - DataLoader - INFO - Filtered 0 samples (attention check failed)
+2025-12-04 16:15:12,527 - DataLoader - INFO - Filtered 0 samples (commute time > 120min)
+2025-12-04 16:15:12,528 - DataLoader - INFO - Filtered 2 samples (Q21/Q42 inconsistent)
+2025-12-04 16:15:12,529 - DataLoader - INFO - Quality check complete: 1002/1004 samples retained (99.8%)
+2025-12-04 16:16:30,174 - DataLoader - INFO - Loading data from data/CN_dataset.xlsx
+2025-12-04 16:16:30,825 - DataLoader - INFO - Loaded 1004 samples from CN
+2025-12-04 16:16:30,828 - DataLoader - INFO - Total samples loaded: 1004
+2025-12-04 16:16:30,828 - DataLoader - INFO - Starting preprocessing...
+2025-12-04 16:16:30,829 - DataLoader - INFO - Filtered 0 samples (completion time < 180s)
+2025-12-04 16:16:30,829 - DataLoader - INFO - Filtered 0 samples (attention check failed)
+2025-12-04 16:16:30,830 - DataLoader - INFO - Filtered 0 samples (commute time > 120min)
+2025-12-04 16:16:30,831 - DataLoader - INFO - Filtered 2 samples (Q21/Q42 inconsistent)
+2025-12-04 16:16:30,831 - DataLoader - INFO - Quality check complete: 1002/1004 samples retained (99.8%)
+2025-12-04 16:16:30,832 - DataLoader - INFO - Processed Q23 (reversed)
+2025-12-04 16:16:30,832 - DataLoader - INFO - Processed Q40 (reversed)
+2025-12-04 16:16:30,842 - DataLoader - INFO - Extracted 0 derived features
+2025-12-04 16:16:30,843 - DataLoader - WARNING - Columns with missing values:
+来源详情    1002
+dtype: int64
+2025-12-04 16:16:30,844 - DataLoader - INFO - Preprocessing complete!
+2025-12-04 16:16:30,872 - DataLoader - INFO - Saved cleaned data to outputs/cleaned_survey_data.csv
+2025-12-04 16:16:30,872 - DataLoader - INFO - Shape: (1002, 80)
+2025-12-04 16:28:00,475 - DataLoader - INFO - Loading data from data/CN_dataset.xlsx
+2025-12-04 16:28:01,118 - DataLoader - INFO - Loaded 1004 samples from CN
+2025-12-04 16:28:01,121 - DataLoader - INFO - Total samples loaded: 1004
+2025-12-04 16:28:01,121 - DataLoader - INFO - Starting preprocessing...
+2025-12-04 16:28:01,122 - DataLoader - INFO - Filtered 0 samples (completion time < 180s)
+2025-12-04 16:28:01,122 - DataLoader - INFO - Filtered 0 samples (attention check failed)
+2025-12-04 16:28:01,123 - DataLoader - INFO - Filtered 0 samples (commute time > 120min)
+2025-12-04 16:28:01,124 - DataLoader - INFO - Filtered 2 samples (Q21/Q42 inconsistent)
+2025-12-04 16:28:01,124 - DataLoader - INFO - Quality check complete: 1002/1004 samples retained (99.8%)
+2025-12-04 16:28:01,125 - DataLoader - INFO - Processed Q23 (reversed)
+2025-12-04 16:28:01,125 - DataLoader - INFO - Processed Q40 (reversed)
+2025-12-04 16:28:01,135 - DataLoader - INFO - Extracted 0 derived features
+2025-12-04 16:28:01,136 - DataLoader - WARNING - Columns with missing values:
+来源详情    1002
+dtype: int64
+2025-12-04 16:28:01,136 - DataLoader - INFO - Preprocessing complete!
+2025-12-04 16:28:01,164 - DataLoader - INFO - Saved cleaned data to outputs/cleaned_survey_data.csv
+2025-12-04 16:28:01,164 - DataLoader - INFO - Shape: (1002, 80)
