@@ -100,6 +100,17 @@ def main():
         action='store_true',
         help='不使用unsloth，使用标准Transformers'
     )
+    parser.add_argument(
+        '-y', '--yes',
+        action='store_true',
+        help='跳过确认提示，直接开始训练'
+    )
+    parser.add_argument(
+        '--resume',
+        type=str,
+        default=None,
+        help='从checkpoint恢复训练（如：checkpoints/sft_model/checkpoint-2000）'
+    )
     args = parser.parse_args()
 
     print_banner("阶段3：大模型微调")
@@ -120,6 +131,8 @@ def main():
     print(f"  - 使用unsloth加速: {'是' if use_unsloth else '否'}")
     print(f"  - 配置文件: configs/training_config.yaml")
     print(f"  - 模型路径: model/models")
+    if args.resume:
+        print(f"  - 从checkpoint恢复: {args.resume}")
     print(f"  - 训练数据: outputs/train_samples.jsonl (9,018样本)")
     print(f"  - 验证数据: outputs/validation_samples.jsonl (1,002样本)")
     print(f"  - 输出目录: checkpoints/sft_model")
@@ -129,17 +142,30 @@ def main():
     print("建议在tmux或screen会话中运行，避免中断".center(80))
     print("=" * 80)
 
-    print("\n按Enter键开始训练...")
-    input()
+    if not args.yes:
+        print("\n按Enter键开始训练...")
+        input()
+    else:
+        print("\n自动开始训练...\n")
 
     try:
+        # 创建带时间戳的训练运行目录
+        from src.utils.path_utils import get_training_run_dir, get_log_path
+        from datetime import datetime
+
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        run_name = f"run_{timestamp}"
+
         # 初始化训练器
         print_banner("初始化训练器")
-        trainer = SFTTrainer(use_unsloth=use_unsloth)
+        print(f"训练运行: {run_name}")
+        print(f"TensorBoard日志: outputs/3_training/runs/{run_name}\n")
+
+        trainer = SFTTrainer(use_unsloth=use_unsloth, run_name=run_name)
 
         # 运行训练
         print_banner("开始训练")
-        train_result, eval_metrics = trainer.run()
+        train_result, eval_metrics = trainer.run(resume_from_checkpoint=args.resume)
 
         # 总结
         print_banner("✓ 训练完成！")

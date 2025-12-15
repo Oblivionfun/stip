@@ -1,5 +1,208 @@
+# ====================================
+# Python
+# ====================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.pytest_cache/
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# ====================================
+# Machine Learning & Deep Learning
+# ====================================
+# Model checkpoints (大型文件)
+checkpoints/
+*.pth
+*.ckpt
+*.h5
+*.safetensors
+*.bin
+
+# Trained models
+models/
+trained_models/
+saved_models/
+
+# TensorBoard logs
+runs/
+tensorboard_logs/
+tb_logs/
+
+# ====================================
+# Project-specific outputs
+# ====================================
+# 训练和评估输出
+outputs/
+!outputs/DIRECTORY_STRUCTURE.md
+!outputs/logs/README.md
+
+# 日志文件
+*.log
+logs/
+
+# 临时输出
+temp/
+tmp/
+cache/
+
+# ====================================
+# Data files (根据需要调整)
+# ====================================
+# 原始数据文件（如果数据较大或包含敏感信息）
+# data/*.xlsx
+# data/*.csv
+# data/*.json
+
+# 处理后的数据
+# outputs/1_persona_modeling/*.csv
+# outputs/2_data_construction/*.jsonl
+
+# ====================================
+# Reference code (第三方参考代码)
+# ====================================
 reference_getsim/
 reference_nature/
 reference_paper/
 reference_pnas/
-.claude
+
+# ====================================
+# IDE & Editors
+# ====================================
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# Spyder
+.spyderproject
+.spyproject
+
+# ====================================
+# Operating System
+# ====================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+.directory
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ====================================
+# Claude Code
+# ====================================
+.claude/
+
+# ====================================
+# Environment & Configuration
+# ====================================
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Configuration files with sensitive data
+# configs/*_secret.yaml
+# configs/*_private.yaml
+
+# ====================================
+# Documentation build
+# ====================================
+docs/_build/
+docs/.doctrees/
+site/
+
+# ====================================
+# Backup files
+# ====================================
+*.bak
+*.swp
+*.swo
+*~
+
+# ====================================
+# Compressed files (除非需要版本控制)
+# ====================================
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# ====================================
+# Custom (项目特定的其他忽略)
+# ====================================
+# 如果有大型模型文件
+model/models/
+*.safetensors
+optimizer.pt
+scheduler.pt
+training_args.bin
+
+# 临时脚本
+scratch/
+playground/
+test_*.py
+debug_*.py

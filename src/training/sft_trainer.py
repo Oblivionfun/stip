@@ -31,13 +31,24 @@ class SFTTrainer:
     def __init__(
         self,
         training_config_path: str = "configs/training_config.yaml",
-        use_unsloth: bool = True
+        use_unsloth: bool = True,
+        run_name: Optional[str] = None
     ):
         self.config = load_config(training_config_path)
-        self.logger = setup_logger(
-            'SFTTrainer',
-            f"{self.config['paths']['logs_dir']}/sft_trainer.log"
-        )
+
+        # 设置运行名称（用于TensorBoard等）
+        if run_name is None:
+            from datetime import datetime
+            run_name = f"run_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        self.run_name = run_name
+
+        # 设置日志（使用时间戳）
+        from src.utils.path_utils import get_log_path
+        log_path = get_log_path('sft_trainer')
+
+        self.logger = setup_logger('SFTTrainer', str(log_path))
+        self.logger.info(f"Training run: {self.run_name}")
+
         self.use_unsloth = use_unsloth
 
         # 尝试导入unsloth
@@ -154,7 +165,7 @@ class SFTTrainer:
         self.logger.info("Preparing datasets...")
 
         # 加载数据集
-        dataset_loader = RouteDecisionDataset(training_config_path="configs/training_config.yaml")
+        dataset_loader = RouteDecisionDataset(train_config_path="configs/training_config.yaml")
         train_dataset, val_dataset = dataset_loader.load_train_val_datasets()
 
         # Tokenize函数
@@ -167,8 +178,8 @@ class SFTTrainer:
                 padding=False,  # 将在collator中动态padding
             )
 
-            # 复制input_ids到labels
-            result['labels'] = result['input_ids'].copy()
+            # 复制input_ids到labels（batched模式需要深拷贝）
+            result['labels'] = [ids[:] for ids in result['input_ids']]
 
             return result
 
@@ -222,8 +233,9 @@ class SFTTrainer:
             logging_steps=training_config['logging_steps'],
             save_steps=training_config['save_steps'],
             save_total_limit=training_config['save_total_limit'],
-            evaluation_strategy=training_config['evaluation_strategy'],
+            eval_strategy=training_config['evaluation_strategy'],  # 新版本使用eval_strategy
             eval_steps=training_config['eval_steps'],
+            logging_dir=f"outputs/3_training/runs/{self.run_name}",  # TensorBoard日志目录（带时间戳）
 
             # 精度
             fp16=training_config['fp16'],
@@ -236,12 +248,14 @@ class SFTTrainer:
             remove_unused_columns=training_config['remove_unused_columns'],
         )
 
-        # Data collator
-        from transformers import DataCollatorForLanguageModeling
+        # Data collator - 使用Seq2Seq collator处理labels
+        from transformers import DataCollatorForSeq2Seq
 
-        data_collator = DataCollatorForLanguageModeling(
+        data_collator = DataCollatorForSeq2Seq(
             tokenizer=self.tokenizer,
-            mlm=False,  # Causal LM，不是MLM
+            model=self.model,
+            padding=True,
+            return_tensors="pt",
         )
 
         # 创建Trainer
@@ -255,14 +269,17 @@ class SFTTrainer:
 
         self.logger.info("✓ Trainer setup complete")
 
-    def train(self):
+    def train(self, resume_from_checkpoint: Optional[str] = None):
         """开始训练"""
         self.logger.info("=" * 80)
-        self.logger.info("Starting training...")
+        if resume_from_checkpoint:
+            self.logger.info(f"Resuming training from {resume_from_checkpoint}...")
+        else:
+            self.logger.info("Starting training...")
         self.logger.info("=" * 80)
 
         # 训练
-        train_result = self.trainer.train()
+        train_result = self.trainer.train(resume_from_checkpoint=resume_from_checkpoint)
 
         # 保存模型
         self.logger.info("Saving final model...")
@@ -295,7 +312,7 @@ class SFTTrainer:
 
         return metrics
 
-    def run(self):
+    def run(self, resume_from_checkpoint: Optional[str] = None):
         """完整的训练流程"""
         # 1. 加载模型
         self.load_model_and_tokenizer()
@@ -307,7 +324,7 @@ class SFTTrainer:
         self.setup_trainer(train_dataset, val_dataset)
 
         # 4. 训练
-        train_result = self.train()
+        train_result = self.train(resume_from_checkpoint=resume_from_checkpoint)
 
         # 5. 评估
         eval_metrics = self.evaluate()

@@ -52,6 +52,7 @@ training:
   save_total_limit: 3
   evaluation_strategy: "steps"
   eval_steps: 500
+  logging_dir: "runs/sft_training"  # TensorBoard日志目录
 
   # 性能优化
   fp16: false
@@ -59,7 +60,7 @@ training:
   tf32: true
 
   # 其他
-  report_to: "none"  # 不上传到wandb等
+  report_to: "tensorboard"  # 启用TensorBoard日志
   seed: 42
   dataloader_num_workers: 4
   remove_unused_columns: false
@@ -112,7 +113,7 @@ evaluation:
 
 # 推理配置（用于测试）
 inference:
-  max_new_tokens: 256
+  max_new_tokens: 512  # 增加到512，确保JSON能完整生成
   temperature: 0.7
   top_p: 0.9
   top_k: 50
@@ -121,6 +122,13 @@ inference:
 
 # 路径配置
 paths:
+  # 各阶段输出目录
+  persona_output_dir: "outputs/1_persona_modeling"
+  data_output_dir: "outputs/2_data_construction"
+  training_output_dir: "outputs/3_training"
+  eval_output_dir: "outputs/4_evaluation"
+
+  # 旧路径（兼容性）
   model_dir: "model/models"
   output_dir: "checkpoints/sft_model"
   cache_dir: ".cache"

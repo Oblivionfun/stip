@@ -110,3 +110,59 @@ route_flexibility:
 2025-12-04 16:28:02,888 - FactorExtractor - INFO -   Q27: -0.160
 2025-12-04 16:28:03,559 - FactorExtractor - INFO - Saved factor loadings heatmap to outputs/factor_loadings_heatmap.png
 2025-12-04 16:28:03,587 - FactorExtractor - INFO - Saved preference factors to outputs/preference_factors.csv
+2025-12-06 02:54:08,853 - FactorExtractor - INFO - Loading cleaned data from outputs/cleaned_survey_data.csv
+2025-12-06 02:54:08,873 - FactorExtractor - INFO - Loaded 1002 samples
+2025-12-06 02:54:08,874 - FactorExtractor - WARNING - Missing columns: ['Q36', 'Q37']
+2025-12-06 02:54:08,874 - FactorExtractor - INFO - Selected 30/32 attitude questions
+2025-12-06 02:54:08,876 - FactorExtractor - INFO - Data shape before preprocessing: (1002, 30)
+2025-12-06 02:54:08,882 - FactorExtractor - INFO - Imputed missing values
+2025-12-06 02:54:08,883 - FactorExtractor - INFO - Standardized data
+2025-12-06 02:54:08,884 - FactorExtractor - INFO - Performing factor analysis with 8 factors...
+2025-12-06 02:54:08,904 - FactorExtractor - INFO - Factor analysis complete!
+2025-12-06 02:54:08,904 - FactorExtractor - INFO - Explained variance: 21.6965
+2025-12-06 02:54:08,906 - FactorExtractor - INFO - Created factor DataFrame with shape (1002, 10)
+2025-12-06 02:54:08,911 - FactorExtractor - INFO - Saved factor loadings to outputs/factor_loadings.csv
+2025-12-06 02:54:08,911 - FactorExtractor - INFO - 
+Factor loadings (top 3 per factor):
+2025-12-06 02:54:08,913 - FactorExtractor - INFO - 
+rerouting_proactiveness:
+2025-12-06 02:54:08,914 - FactorExtractor - INFO -   Q41: -0.565
+2025-12-06 02:54:08,914 - FactorExtractor - INFO -   Q40_reversed: -0.500
+2025-12-06 02:54:08,914 - FactorExtractor - INFO -   Q25: -0.399
+2025-12-06 02:54:08,915 - FactorExtractor - INFO - 
+information_dependency:
+2025-12-06 02:54:08,915 - FactorExtractor - INFO -   Q40_reversed: 0.467
+2025-12-06 02:54:08,915 - FactorExtractor - INFO -   Q7: -0.443
+2025-12-06 02:54:08,915 - FactorExtractor - INFO -   Q13: -0.422
+2025-12-06 02:54:08,916 - FactorExtractor - INFO - 
+time_reliability_preference:
+2025-12-06 02:54:08,916 - FactorExtractor - INFO -   Q14: -0.513
+2025-12-06 02:54:08,916 - FactorExtractor - INFO -   Q13: -0.507
+2025-12-06 02:54:08,916 - FactorExtractor - INFO -   Q40_reversed: -0.389
+2025-12-06 02:54:08,917 - FactorExtractor - INFO - 
+risk_aversion:
+2025-12-06 02:54:08,917 - FactorExtractor - INFO -   Q7: 0.368
+2025-12-06 02:54:08,917 - FactorExtractor - INFO -   Q22: -0.334
+2025-12-06 02:54:08,917 - FactorExtractor - INFO -   Q28: -0.271
+2025-12-06 02:54:08,918 - FactorExtractor - INFO - 
+familiar_route_preference:
+2025-12-06 02:54:08,918 - FactorExtractor - INFO -   Q20: -0.419
+2025-12-06 02:54:08,918 - FactorExtractor - INFO -   Q16: -0.368
+2025-12-06 02:54:08,918 - FactorExtractor - INFO -   Q32: 0.255
+2025-12-06 02:54:08,919 - FactorExtractor - INFO - 
+time_sensitivity:
+2025-12-06 02:54:08,919 - FactorExtractor - INFO -   Q6: -0.318
+2025-12-06 02:54:08,919 - FactorExtractor - INFO -   Q12: -0.283
+2025-12-06 02:54:08,919 - FactorExtractor - INFO -   Q8: 0.244
+2025-12-06 02:54:08,920 - FactorExtractor - INFO - 
+external_info_sensitivity:
+2025-12-06 02:54:08,920 - FactorExtractor - INFO -   Q23_reversed: -0.247
+2025-12-06 02:54:08,920 - FactorExtractor - INFO -   Q18: -0.232
+2025-12-06 02:54:08,920 - FactorExtractor - INFO -   Q32: -0.231
+2025-12-06 02:54:08,921 - FactorExtractor - INFO - 
+route_flexibility:
+2025-12-06 02:54:08,921 - FactorExtractor - INFO -   Q29: 0.247
+2025-12-06 02:54:08,921 - FactorExtractor - INFO -   Q38: -0.178
+2025-12-06 02:54:08,921 - FactorExtractor - INFO -   Q27: -0.160
+2025-12-06 02:54:09,657 - FactorExtractor - INFO - Saved factor loadings heatmap to outputs/factor_loadings_heatmap.png
+2025-12-06 02:54:09,684 - FactorExtractor - INFO - Saved preference factors to outputs/preference_factors.csv

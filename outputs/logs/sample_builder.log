@@ -17,3 +17,41 @@
 2025-12-04 16:46:03,650 - SampleBuilder - INFO - Saved 1002 samples to outputs/validation_samples.jsonl
 2025-12-04 16:46:03,650 - SampleBuilder - INFO - File size: 1.72 MB
 2025-12-04 16:46:03,650 - SampleBuilder - INFO - Saved statistics
+2025-12-05 22:42:14,098 - SampleBuilder - INFO - Loaded 1002 personas, 10020 scenarios, 10020 decisions
+2025-12-05 22:42:14,099 - SampleBuilder - INFO - Building training samples for 10020 scenarios...
+2025-12-05 22:42:14,115 - SampleBuilder - INFO - Progress: 1000/10020 samples
+2025-12-05 22:42:14,133 - SampleBuilder - INFO - Progress: 2000/10020 samples
+2025-12-05 22:42:14,151 - SampleBuilder - INFO - Progress: 3000/10020 samples
+2025-12-05 22:42:14,168 - SampleBuilder - INFO - Progress: 4000/10020 samples
+2025-12-05 22:42:14,184 - SampleBuilder - INFO - Progress: 5000/10020 samples
+2025-12-05 22:42:14,201 - SampleBuilder - INFO - Progress: 6000/10020 samples
+2025-12-05 22:42:14,217 - SampleBuilder - INFO - Progress: 7000/10020 samples
+2025-12-05 22:42:14,236 - SampleBuilder - INFO - Progress: 8000/10020 samples
+2025-12-05 22:42:14,254 - SampleBuilder - INFO - Progress: 9000/10020 samples
+2025-12-05 22:42:14,271 - SampleBuilder - INFO - Progress: 10000/10020 samples
+2025-12-05 22:42:14,271 - SampleBuilder - INFO - Built 10020 training samples
+2025-12-05 22:42:14,272 - SampleBuilder - INFO - Split into 9018 train and 1002 val samples
+2025-12-05 22:42:14,643 - SampleBuilder - INFO - Saved 9018 samples to outputs/train_samples.jsonl
+2025-12-05 22:42:14,644 - SampleBuilder - INFO - File size: 19.01 MB
+2025-12-05 22:42:14,672 - SampleBuilder - INFO - Saved 1002 samples to outputs/validation_samples.jsonl
+2025-12-05 22:42:14,672 - SampleBuilder - INFO - File size: 2.11 MB
+2025-12-05 22:42:14,672 - SampleBuilder - INFO - Saved statistics
+2025-12-06 02:58:06,651 - SampleBuilder - INFO - Loaded 1002 personas, 10020 scenarios, 10020 decisions
+2025-12-06 02:58:06,652 - SampleBuilder - INFO - Building training samples for 10020 scenarios...
+2025-12-06 02:58:06,668 - SampleBuilder - INFO - Progress: 1000/10020 samples
+2025-12-06 02:58:06,684 - SampleBuilder - INFO - Progress: 2000/10020 samples
+2025-12-06 02:58:06,703 - SampleBuilder - INFO - Progress: 3000/10020 samples
+2025-12-06 02:58:06,720 - SampleBuilder - INFO - Progress: 4000/10020 samples
+2025-12-06 02:58:06,737 - SampleBuilder - INFO - Progress: 5000/10020 samples
+2025-12-06 02:58:06,756 - SampleBuilder - INFO - Progress: 6000/10020 samples
+2025-12-06 02:58:06,773 - SampleBuilder - INFO - Progress: 7000/10020 samples
+2025-12-06 02:58:06,791 - SampleBuilder - INFO - Progress: 8000/10020 samples
+2025-12-06 02:58:06,809 - SampleBuilder - INFO - Progress: 9000/10020 samples
+2025-12-06 02:58:06,827 - SampleBuilder - INFO - Progress: 10000/10020 samples
+2025-12-06 02:58:06,828 - SampleBuilder - INFO - Built 10020 training samples
+2025-12-06 02:58:06,829 - SampleBuilder - INFO - Split into 9018 train and 1002 val samples
+2025-12-06 02:58:07,211 - SampleBuilder - INFO - Saved 9018 samples to outputs/train_samples.jsonl
+2025-12-06 02:58:07,211 - SampleBuilder - INFO - File size: 19.01 MB
+2025-12-06 02:58:07,240 - SampleBuilder - INFO - Saved 1002 samples to outputs/validation_samples.jsonl
+2025-12-06 02:58:07,241 - SampleBuilder - INFO - File size: 2.11 MB
+2025-12-06 02:58:07,241 - SampleBuilder - INFO - Saved statistics

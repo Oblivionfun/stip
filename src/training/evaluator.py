@@ -33,10 +33,12 @@ class ModelEvaluator:
     ):
         self.model_path = model_path
         self.config = load_config(training_config_path)
-        self.logger = setup_logger(
-            'ModelEvaluator',
-            f"{self.config['paths']['logs_dir']}/evaluator.log"
-        )
+
+        # 使用时间戳日志
+        from src.utils.path_utils import get_log_path
+        log_path = get_log_path('evaluator')
+
+        self.logger = setup_logger('ModelEvaluator', str(log_path))
 
     def load_model(self):
         """加载微调后的模型"""
@@ -110,11 +112,12 @@ class ModelEvaluator:
         # 构造输入
         messages = [{"role": "user", "content": prompt}]
 
-        # Tokenize
+        # Tokenize（禁用Qwen的thinking模式，强制JSON输出）
         text = self.tokenizer.apply_chat_template(
             messages,
             tokenize=False,
-            add_generation_prompt=True
+            add_generation_prompt=True,
+            enable_thinking=False  # 禁用<think>标签
         )
 
         inputs = self.tokenizer(text, return_tensors="pt").to(self.model.device)
@@ -140,6 +143,10 @@ class ModelEvaluator:
 
         # 解析JSON
         parsed = self.parse_model_output(assistant_response)
+
+        # 调试：如果解析失败，记录原始输出
+        if parsed is None:
+            self.logger.warning(f"Failed to parse output. Raw response (first 500 chars):\n{assistant_response[:500]}")
 
         return parsed
 
@@ -308,6 +315,14 @@ class ModelEvaluator:
             'decision_metrics': decision_metrics,
             'perplexity': perplexity,
             'num_samples': len(ground_truth_samples),
+            'predictions': predictions[:20],  # 保存前20个完整预测（包括thinking）
+            'ground_truth': [
+                {
+                    'id': s['id'],
+                    'prompt': s['prompt'][:300] + '...',  # 截断prompt便于查看
+                    'response': s['response']  # 保存完整response（包括thinking）
+                } for s in ground_truth_samples[:20]
+            ]
         }
 
         # 保存结果
@@ -348,19 +363,55 @@ class ModelEvaluator:
 
 def main():
     """主函数"""
+    import argparse
+
+    parser = argparse.ArgumentParser(description="评估路径决策模型")
+    parser.add_argument(
+        "--model-path",
+        type=str,
+        default="checkpoints/sft_model",
+        help="模型路径（默认：checkpoints/sft_model，基础模型：model/models）"
+    )
+    parser.add_argument(
+        "--num-samples",
+        type=int,
+        default=100,
+        help="评估样本数量（默认：100，全部评估使用-1）"
+    )
+    parser.add_argument(
+        "--output",
+        type=str,
+        default=None,
+        help="结果保存路径（可选）"
+    )
+
+    args = parser.parse_args()
 
     print("=" * 80)
     print("模型评估")
     print("=" * 80)
+    print(f"模型路径: {args.model_path}")
+    print(f"评估样本: {args.num_samples if args.num_samples > 0 else '全部'}")
+    print("=" * 80)
 
     # 初始化评估器
-    evaluator = ModelEvaluator()
+    evaluator = ModelEvaluator(model_path=args.model_path)
 
     # 运行评估
-    results = evaluator.run_evaluation(num_samples=100)  # 先评估100个样本
+    results = evaluator.run_evaluation(
+        num_samples=None if args.num_samples < 0 else args.num_samples
+    )
 
     # 打印结果
     evaluator.print_results(results)
+
+    # 保存结果（可选）
+    if args.output:
+        output_path = Path(args.output)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(output_path, 'w', encoding='utf-8') as f:
+            json.dump(results, f, indent=2, ensure_ascii=False)
+        print(f"\n✓ 结果已保存到: {args.output}")
 
 
 if __name__ == "__main__":

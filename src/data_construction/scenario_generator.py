@@ -363,16 +363,18 @@ class ScenarioGenerator:
             purpose = scenario['trip_purpose']
             stats['trip_purposes'][purpose] = stats['trip_purposes'].get(purpose, 0) + 1
 
-            # 时段
-            hour = int(scenario['departure_time'].split(':')[0])
-            if 7 <= hour < 10:
-                period = 'morning_rush'
-            elif 17 <= hour < 20:
-                period = 'evening_rush'
-            else:
-                period = 'off_peak'
+            # 时段（直接使用抽象时段）
+            period = scenario.get('time_period', 'off-peak hours')
 
-            stats['time_periods'][period] = stats['time_periods'].get(period, 0) + 1
+            # 标准化时段名称用于统计
+            if 'morning' in period:
+                period_key = 'morning_rush'
+            elif 'evening' in period:
+                period_key = 'evening_rush'
+            else:
+                period_key = 'off_peak'
+
+            stats['time_periods'][period_key] = stats['time_periods'].get(period_key, 0) + 1
 
         # 计算比例
         total = len(scenarios)
@@ -442,7 +444,7 @@ def main():
     for i, scenario in enumerate(scenarios[:2], 1):
         print(f"\n[{i}] {scenario['scenario_id']}:")
         print(f"  出行: {scenario['origin']} → {scenario['destination']} ({scenario['trip_purpose']})")
-        print(f"  时间: {scenario['departure_time']} ({scenario['day_of_week']})")
+        print(f"  时段: {scenario['time_period']}")  # 使用抽象时段
         print(f"  路径A: {scenario['routes'][0]['current_travel_time']}分钟 (延误{scenario['routes'][0]['current_delay']}分钟)")
         print(f"  路径B: {scenario['routes'][1]['current_travel_time']}分钟 (延误{scenario['routes'][1]['current_delay']}分钟)")
         if scenario['traffic_events']:

@@ -1,9 +1,0 @@
-{
-  "total_samples": 10020,
-  "avg_prompt_length": 188.66,
-  "avg_reflection_length": 49.83,
-  "plan_distribution": {
-    "update_path": 6855,
-    "none": 3165
-  }
-}
